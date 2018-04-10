@@ -1,18 +1,19 @@
 package IHM;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import model.Duel;
 import model.Joueur;
 import model.Test1;
 import strategie.Knuth2;
-
+import IHM.Men_general;
 public class Men_mastermind {
 
 
 
 
-	public Men_mastermind() {
+	public Men_mastermind() throws IOException {
 		System.out.println("\n"
 				+"\n"+
 				"                  MMMM    MMM       A       SSSSSS  TTTTTTT  EEEEEEE  RRRRR     MMMMM    MMM   I  NN   N   DDD  "+"\n"+
@@ -42,17 +43,19 @@ public class Men_mastermind {
 			Test1.main(null);;
 
 
+			new Men_mastermind();
+
 			break;
 		case 2: 
 			System.out.println("Mode challenger");
 			Joueur jo=new Joueur(4);
 			jo.run();
-
+			new Men_mastermind();
 		case 3:
 			System.out.println("Merci de saisir le code confidentiel ");
 			Duel du = new Duel(4,new Knuth2(4));
-du.run();
-
+			du.run();
+			new Men_mastermind();
 		default:
 			break;
 		}

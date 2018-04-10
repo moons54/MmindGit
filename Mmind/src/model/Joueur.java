@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
+import IHM.Men_general;
 import model.CodeS;
 import model.Reponse;
 
@@ -41,9 +42,12 @@ public class Joueur {
 			if (reponse.blacks==this.taillecode) {
 				System.out.println("vous avez Gagné en "+i+" coup");
 
+
 				//this.secretCode=createRandomCode(this.taillecode);
 				//	guess= this.strategie.reset();
+
 				break;
+
 			}else {
 
 				System.out.println(reponse.toString()+" tour numéro "+(i));

@@ -6,14 +6,14 @@ public class Demarrage {
 
 	public static void main(String[] args) {
 
-		 try {
+		try {
 			Men_general mn = new Men_general();
-		//	Runtime.getRuntime().exec("cls");
+			//	Runtime.getRuntime().exec("cls");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 
 	}
 

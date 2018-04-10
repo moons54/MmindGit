@@ -19,7 +19,7 @@ public class Men_general {
 
 
 	public Men_general() throws IOException{
-		
+
 		for (int i = 0; i < espace; i++) {
 			System.out.println();
 		}
@@ -54,5 +54,5 @@ public class Men_general {
 
 
 	}
-	
+
 }
