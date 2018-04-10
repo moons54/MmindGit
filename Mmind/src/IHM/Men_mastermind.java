@@ -2,8 +2,10 @@ package IHM;
 
 import java.util.Scanner;
 
+import model.Duel;
 import model.Joueur;
 import model.Test1;
+import strategie.Knuth2;
 
 public class Men_mastermind {
 
@@ -25,7 +27,7 @@ public class Men_mastermind {
 				"\n"+"-----------------------------------------------------------------------"+
 				"\n"+"CHOIX 2 : MODE CHALLENGER: L'ordinateur contre le Décodeur : le joueur"+
 				"\n"+"------------------------------------------------------------------------"+
-				"\n"+"CHOIX 2 : MODE DUEL: Partie tour a tour pour trouver le code confidentiel"+
+				"\n"+"CHOIX 3 : MODE DUEL: Partie tour a tour pour trouver le code confidentiel"+
 				"\n"+"------------------------------------------------------------------------"+
 				"\n"+"Votre choix : ");
 
@@ -45,8 +47,11 @@ public class Men_mastermind {
 			System.out.println("Mode challenger");
 			Joueur jo=new Joueur(4);
 			jo.run();
-			
-		
+
+		case 3:
+			System.out.println("Merci de saisir le code confidentiel ");
+			Duel du = new Duel(4,new Knuth2(4));
+du.run();
 
 		default:
 			break;

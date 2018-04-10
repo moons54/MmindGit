@@ -9,8 +9,8 @@ import model.Stat;
 public class Test1 {
 	
 	private static final int taillecode=4;
-//private static final choixMastermindIA STRATEGIE1 = new Knuth2(taillecode);
-	private static final choixMastermindIA STRATEGIE1 = new Simple(taillecode);
+private static final choixMastermindIA STRATEGIE1 = new Knuth2(taillecode);
+//	private static final choixMastermindIA STRATEGIE1 = new Simple(taillecode);
 	
 	
 	
