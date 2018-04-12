@@ -4,6 +4,8 @@ package model;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import model.CodeS;
 import model.Reponse;
 import strategie.choixMastermindIA;
@@ -31,9 +33,12 @@ public class Duel {
 
 	public Duel run() {
 
+
 		System.out.println(" Code secret a faire deviner au joueur "+secretCode.toString());
+		System.out.println("val de cde secret de LIA "+secretCode1);
+
 		//Declaration hypothese du joueur
-		CodeS guess=new CodeS();
+		//	CodeS guess=new CodeS();
 		CodeS guess1=new CodeS();
 		//
 		guess1= this.strategie.reset();
@@ -41,30 +46,34 @@ public class Duel {
 
 		/** boucle pour les combinaison duel du joueur et IA*/
 		for (int i = 1; i <6 ; i++) {
-
+			System.out.println("----------------------------------------------");
+			System.out.println("Tour Numéro "+i);
 			//Hypothese du joueur Humain
+
 			guess=this.HypotheseJoueur(taillecode);
 			//reponse du joueur Humain
 			Reponse reponse = guess.compare(this.secretCode);
 
-			//
+			//Reponse ordi
 			Reponse reponse1 = guess1.compare(this.secretCode1);
+
+
 
 			if (reponse.blacks==this.taillecode) {
 				System.out.println("vous avez Gagné en "+i+" coup");
 
 
 				break;
-				
+
 			}
 			else {
-				System.out.println(reponse.toString()+" tour numéro "+(i));
-				//System.out.println();
+				System.out.println(reponse.toString());
 				//System.out.println(guess.toString());
-				if (i==5) {
-					System.out.println("Perdu !!");
+				//if (i==5) {
+				//	System.out.println("Perdu !!");
 			}
 			if (reponse1.blacks==this.taillecode) {
+				System.out.println(guess1);
 				System.out.println("IA a gagne en "+i+" coup");
 
 				//this.secretCode=createRandomCode(this.taillecode);
@@ -73,54 +82,27 @@ public class Duel {
 			}else {
 				guess1=this.strategie.Bonchoix(reponse1);
 				System.out.println(guess1.toString());
-				System.out.println("val de cde secret 1"+secretCode1);
-				System.out.println(reponse1.toString()+" tour numéro "+(i));
-				
+				System.out.println(reponse1.toString());
+
+
 				//System.out.println();
-				
+				guess1.get(this.taillecode-1);
 				if (i==5) {
 					System.out.println("Personne a trouvé");
-			
-					/**Boucle de questionnement pour l'IA*/
-	/**					for (int j = 1; j <6 ; i++) {
 
 
-						System.out.println("le code secret a faire retrouver par l'IA  "+secretCode1.toString());
-						System.out.println(guess1.toString());
-						//reponse du joueur Humain
-						Reponse reponse1 = guess1.compare(this.secretCode1);
-
-						//
-
-
-						if (reponse1.blacks==this.taillecode) {
-							System.out.println("vous avez Gagné en "+j+" coup");
-
-							//this.secretCode=createRandomCode(this.taillecode);
-							guess1= this.strategie.reset();
-							break;
-						}else {
-							guess1=this.strategie.Bonchoix(reponse1);
-							System.out.println(reponse1.toString()+" tour numéro "+(i));
-							System.out.println();
-							System.out.println(guess1.toString());
-							if (i==5) {
-								System.out.println("Perdu !!");
-							}
-						}
-
-						guess1.get(this.taillecode-1);
-					}
-					*/
 				}
+
+
+
 			}
 
 			guess1.get(this.taillecode-1);
 		}
-		
 
-		
-		}
+
+
+		//}
 		return null;
 	}
 
@@ -152,15 +134,16 @@ public class Duel {
 	public static CodeS SecretJoueur(int length) {
 		//Random rnd = new Random();
 		System.out.println("code secret saisi :");
-		Scanner sj = new Scanner(System.in);
+		Scanner ss = new Scanner(System.in);
 
-		String val1 = sj.nextLine();
+		String val1 = ss.nextLine();
 
 		T[] ts = new T[length];
 		for (int i = 0; i < length; i++) {
 			ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
 
 		}
+
 		return new CodeS(ts);
 	}
 }

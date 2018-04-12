@@ -35,7 +35,8 @@ public class Men_general {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Votre choix");
-		int val = sc.nextInt();System.out.print("++");
+		int val = sc.nextInt();
+		System.out.print("++");
 
 
 		switch (val) {
