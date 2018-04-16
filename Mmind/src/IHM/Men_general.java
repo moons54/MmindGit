@@ -1,5 +1,6 @@
 package IHM;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,7 +20,11 @@ public class Men_general {
 
 
 	public Men_general() throws IOException{
-
+		
+		/**chargement du fichier confo.properties */
+		
+		
+		
 		for (int i = 0; i < espace; i++) {
 			System.out.println();
 		}
@@ -47,7 +52,12 @@ public class Men_general {
 		}
 		new Men_mastermind();
 		break;
-
+		case 2:System.out.println("chargement +/-");
+		for (int i = 0; i < espace; i++) {
+			System.out.println();
+		}
+		new Men_plusetmoins();
+		
 		default:
 			break;
 		}

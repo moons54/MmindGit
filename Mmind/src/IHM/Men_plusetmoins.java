@@ -1,0 +1,90 @@
+package IHM;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import model.Duel;
+import model.Joueur;
+import model.Simul;
+import model.Stat;
+import model.Test1;
+import strategie.Knuth2;
+
+public class Men_plusetmoins {
+	
+	
+	public Men_plusetmoins() throws IOException{
+	System.out.println("\n"
+			+"\n"+
+			"                        +++                  //                      "+"\n"+
+			"                        +++                 //                       "+"\n"+
+			"                   +++++++++++++           //          +++++++++++++ "+"\n"+
+			"                   +++++++++++++          //           +++++++++++++ "+"\n"+
+			"                        +++              //                          "+"\n"+
+			"                        +++             //                           "+"\n"+
+			"\n"+
+
+			"\n"+"-----------------------------------------------------------------------"+
+			"\n"+"CHOIX 1 MODE DEFENSEUR : Codeur : Joueur contre Décodeur : L'ordinateur"+
+			"\n"+"-----------------------------------------------------------------------"+
+			"\n"+"CHOIX 2 : MODE CHALLENGER: L'ordinateur contre le Décodeur : le joueur"+
+			"\n"+"------------------------------------------------------------------------"+
+			"\n"+"CHOIX 3 : MODE DUEL: Partie tour a tour pour trouver le code confidentiel"+
+			"\n"+"------------------------------------------------------------------------"+
+			"\n"+"Votre choix : ");
+
+	Scanner sc = new Scanner(System.in);
+
+	int val = sc.nextInt();
+	bouclechoix(val);
+}
+
+public void bouclechoix(int val) throws IOException {
+	switch (val) {
+	case 1:
+		System.out.println("Merci de saisir le code confidentiel ");
+		//Simul sim= new Simul(4,new Knuth2(4));
+		Joueur jo2=new Joueur(4);
+		jo2.run3();
+		replay(val);
+		break;
+	case 2: 
+		System.out.println("Mode challenger");
+		Joueur jo=new Joueur(4);
+		jo.run2();
+		replay(val);
+	case 3:
+		System.out.println("Merci de saisir le code confidentiel ");
+		Duel du = new Duel(4,new Knuth2(4));
+		du.run();
+		replay(val);
+	default:
+		break;
+	}
+
+}
+
+public void replay(int val) throws IOException {
+	System.out.println("Souhaitez vous ?"
+			+"\n"+"1____Rejouer une partie"
+			+"\n"+"2____Changer de jeu"
+			+"\n"+"3____Quitter l'application");
+
+	Scanner scc= new Scanner(System.in);
+
+	int retourchoix=scc.nextInt();
+	switch (retourchoix) {
+	case 1:
+		bouclechoix(val);
+		break;
+	case 2:
+		new Men_general();
+
+	default:
+		System.out.println("Fin de partie");
+		break;
+	}	
+
+}
+}
+

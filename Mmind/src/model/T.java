@@ -12,8 +12,8 @@ public enum T {
 //	T8(8);
 	
 	
-	public final int i;
-	
+	public int i;
+	//public final int i;
 	
 	T(int i) {
 		this.i = i;

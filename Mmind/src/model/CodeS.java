@@ -3,6 +3,7 @@ package model;
 
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,6 +85,27 @@ public class CodeS {
 		}
 		return new Reponse(OK, NOK);
 	}
+
+	/**
+	 * Methode ayant pour objectif l'analyse de la réponse pour le jeu plus et moins
+	 * 
+	 * @param other
+	 */
+	public void plusetmoins(CodeS other) {
+		for (int i = 0; i < this.code.length; i++) {
+if (code[i].i < other.code[i].i) {
+	System.out.print("+");
+}
+if (code[i].i > other.code[i].i) {
+	System.out.print("-");
+}
+if (code[i].i ==other.code[i].i) {
+	System.out.print("=");
+}
+		
+		}
+	}
+
 
 	/**
 	 * 

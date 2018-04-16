@@ -30,6 +30,8 @@ public class Test1 {
 		Simul simul;
 		Simul simul1;
 		Stat stat ;
+		
+		/**
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -48,10 +50,10 @@ public class Test1 {
 			
 			prop.store(output, null);
 			
-			
+			*/
 	//		input = new FileInputStream("config.properties");
 //prop.load(input);
-System.out.println(prop.getProperty("taillecode"));
+//System.out.println(prop.getProperty("taillecode"));
 			//simul = new Simul(taillecode,STRATEGIE);
 			simul1=new Simul(taillecode,STRATEGIE1);
 			//stat=simul.run();
@@ -59,7 +61,7 @@ System.out.println(prop.getProperty("taillecode"));
 			
 			
 		}
-			
+			/*
 			 catch (IOException io) {
 					io.printStackTrace();
 				} finally {
@@ -77,7 +79,7 @@ System.out.println(prop.getProperty("taillecode"));
 
 	}
 
-
+*/
 
 
 

@@ -38,9 +38,7 @@ public class Reponse {
 	/**
 	 * LIst des toutes les reponses qui ont été donnée
 	 * 
-	 * @param length
-	 *            Code length
-	 * @return List of all possible answers
+	
 	 */
 	public static List<Reponse> createAllAnswers(int length) {
 		List<Reponse> result = new ArrayList<Reponse>();
