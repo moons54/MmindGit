@@ -11,27 +11,29 @@ import com.sun.javafx.logging.Logger;
 import IHM.Men_general;
 
 public class Demarrage {
-	
+
 	public static void main(String[] args) throws IOException {
 
 		/**
 		 * 
 		 * 
 		 * 
-		 * lien avec le fichie config.properties
+		 * lien avec le fichier config.properties
+		 * voir README.MD pour connaitre les parametres de jeu
+		 * 
 		 * 
 		 * 
 		 * 
 		 */
-		
-		
-		
+
+
+
 		Properties prop = new Properties();
 
 		InputStream input = null;
 
 		OutputStream output = null;
-		
+
 		try {
 			input = new FileInputStream("config.properties");
 
@@ -76,17 +78,7 @@ public class Demarrage {
 
 		}
 
-		
-		
-		
-		
-		
-			
-			
-			 new Men_general();
-			
-		
-
+		new Men_general();
 
 	}
 

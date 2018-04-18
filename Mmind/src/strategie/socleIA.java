@@ -37,7 +37,7 @@ public abstract class socleIA  implements choixMastermindIA{
 	
 	
 	/**
-	 * methotde reset initialise la liste d'hypothese et propose la premier combionaision
+	 * methotde reset initialise la liste d'hypothese et propose la premier combinaison
 	 * 
 	 * 
 	 */

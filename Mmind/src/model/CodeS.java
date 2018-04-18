@@ -90,8 +90,11 @@ public class CodeS {
 	 * Methode ayant pour objectif l'analyse de la réponse pour le jeu plus et moins
 	 * 
 	 * @param other
+	 * @return 
 	 */
-	public void plusetmoins(CodeS other) {
+	public Reponse plusetmoins(CodeS other) {
+		int OK=0;
+		int NOK=0;
 		for (int i = 0; i < this.code.length; i++) {
 if (code[i].i < other.code[i].i) {
 	System.out.print("+");
@@ -101,9 +104,11 @@ if (code[i].i > other.code[i].i) {
 }
 if (code[i].i ==other.code[i].i) {
 	System.out.print("=");
+	OK++;
 }
 		
 		}
+		return new Reponse(OK,NOK);
 	}
 
 

@@ -1,19 +1,26 @@
 package IHM;
 
 import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 import model.Duel;
+import model.Jeupropriete;
 import model.Joueur;
+import model.Simul;
 import model.Test1;
 import strategie.Knuth2;
 import IHM.Men_general;
+import model.Jeupropriete;
+
 public class Men_mastermind {
 
 
 
 
 	public Men_mastermind() throws IOException {
+		
+		
 		System.out.println("\n"
 				+"\n"+
 				"                  MMMM    MMM       A       SSSSSS  TTTTTTT  EEEEEEE  RRRRR     MMMMM    MMM   I  NN   N   DDD  "+"\n"+
@@ -24,7 +31,7 @@ public class Men_mastermind {
 				"\n"+
 
 				"\n"+"-----------------------------------------------------------------------"+
-				"\n"+"CHOIX 1 MODE DEFENSEUR : Codeur : Joueur contre Décodeur : L'ordinateur"+
+				"\n"+"CHOIX 1 : MODE DEFENSEUR : Codeur : Joueur contre Décodeur : L'ordinateur"+
 				"\n"+"-----------------------------------------------------------------------"+
 				"\n"+"CHOIX 2 : MODE CHALLENGER: L'ordinateur contre le Décodeur : le joueur"+
 				"\n"+"------------------------------------------------------------------------"+
@@ -40,13 +47,14 @@ public class Men_mastermind {
 	public void bouclechoix(int val) throws IOException {
 		switch (val) {
 		case 1:
-			System.out.println("Merci de saisir le code confidentiel ");
-			Test1.main(null);;
+			System.out.println("Saisie du code Secret ");
+			//Simul sim= new Simul(Jeupropriete.taillecode,  Jeupropriete.STRATEGIE1);
+			Test1.main(null);
 			replay(val);
 			break;
 		case 2: 
 			System.out.println("Mode challenger");
-			Joueur jo=new Joueur(4);
+			Joueur jo=new Joueur(Jeupropriete.taillecode);
 			jo.run();
 			replay(val);
 		case 3:

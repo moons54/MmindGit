@@ -105,7 +105,89 @@ public class Duel {
 		//}
 		return null;
 	}
+	public Duel DuelPlusMoins() {
 
+
+		System.out.println(" Code secret a faire deviner au joueur "+secretCode.toString());
+		System.out.println("val de cde secret de LIA "+secretCode1);
+
+		//Declaration hypothese du joueur
+		//	CodeS guess=new CodeS();
+		CodeS guess1=new CodeS();
+		//
+		guess1= this.strategie.reset();
+
+
+		/** boucle pour les combinaison duel du joueur et IA*/
+		for (int i = 1; i <6 ; i++) {
+			System.out.println("----------------------------------------------");
+			System.out.println("Tour Numéro "+i);
+			//Hypothese du joueur Humain
+
+			guess=this.HypotheseJoueur(taillecode);
+			
+		System.out.println(guess);	
+			//reponse du joueur Humain
+			Reponse reponse = guess.plusetmoins(this.secretCode);
+System.out.println("______________");
+System.out.println(guess1);
+			//Reponse ordi
+			Reponse reponse1 = guess1.plusetmoins(this.secretCode1);
+
+
+
+			if (reponse.blacks==this.taillecode) {
+				System.out.println("vous avez Gagné en "+i+" coup");
+				break;
+
+			}
+			else {
+			//	System.out.println(reponse.toString());
+				
+			}
+			if (reponse1.blacks==this.taillecode) {
+				System.out.println(guess1);
+				System.out.println("IA a gagne en "+i+" coup");
+
+				
+				break;
+			}else {
+				
+				for (int j = 0; j <4; j++) {
+					if (guess1.get(j).i>secretCode.get(j).i) {
+						guess1.get(j).i--;
+					}
+					else if (guess1.get(j).i<secretCode.get(j).i) {
+						guess1.get(j).i++;
+					}
+					else if (guess1.get(j).i==secretCode.get(j).i) {
+
+					}
+				}
+				System.out.println(guess1.toString());
+				
+
+
+				
+			//	guess1.get(this.taillecode-1);
+				if (i==5) {
+					System.out.println("Personne a trouvé");
+
+
+				}
+
+
+
+		//	}
+
+		//	guess1.get(this.taillecode-1);
+		}
+
+
+
+		}
+		return null;
+	}
 	public static CodeS HypotheseJoueur(int length) {
 		Scanner sc1= new Scanner(System.in);
 

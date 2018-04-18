@@ -16,19 +16,20 @@ public class Joueur {
 	private CodeS secretCode;
 	private CodeS guess;
 	private int chiffre;
-	private int coup[]=new int[taillecode];
-	private int code[]=new int[taillecode];
-
+	//private int coup[]=new int[4];
+	//private int code[]=new int[4];
+	//public int coup[]= {5,5,5,5};
 	public Joueur(int taillecode) {
 		this.taillecode=taillecode;
 		this.secretCode=createRandomCode(this.taillecode);
 		//	this.guess=HypotheseJoueur(this.taillecode);
 
 	}
+	/**methode de jeu pour Mastermind joueur : decodeur ordinateur : codeur*/
 	public Joueur run() {
 
 		System.out.println(" code secret "+secretCode.toString());
-		//System.out.println(guess.toString());
+		
 		CodeS guess=new CodeS();
 
 
@@ -98,18 +99,15 @@ public class Joueur {
 	 * un appel est fait pour la methode plusetmoins qui analyse la réponse
 	 * @return
 	 */
-	public Joueur run2() {
+	public Joueur plusmoinsJoueur() {
 
 		System.out.println(" code secret "+secretCode.toString());
 
 		for (int i = 1; i <6 ; i++) {
 
-			try {
-				guess=this.HypotheseJoueur(taillecode);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			guess=this.HypotheseJoueur(taillecode);
+
 
 			System.out.println("valeur du guess"+guess.toString());
 
@@ -117,7 +115,7 @@ public class Joueur {
 
 			if (this.guess.equals(secretCode))  {
 
-				System.out.println("vous avez Gagné en "+i+" coup");
+				System.out.println("vous avez Gagné en "+(i+1)+" coup");
 				break;
 
 			}
@@ -132,47 +130,5 @@ public class Joueur {
 
 		return null ;
 	}
-	public Joueur run3() {
 
-		Random rnd= new Random();
-		System.out.println(" code secret "+secretCode.toString());
-		/**initialisation du code secret*/
-		Scanner sccode= new Scanner(System.in);
-		int temp=sccode.nextInt();
-		for (int i = 0; i < code.length; i++) {
-			code[i]=temp;
-			System.out.print(code[i]);
-		}
-		System.out.println();
-		/**initialisation du premier coup*/
-		int coup[]=new int[taillecode];
-		for (int j = 0; j < coup.length; j++) {
-			coup[j]=rnd.nextInt(8);
-			System.out.print(coup[j]);
-		}
-		for (int i = 1; i <6 ; i++) {
-			for (int j = 0; j < coup.length; j++) {
-				System.out.print(coup[j]);
-			}
-			
-			System.out.println();
-if (coup.equals(code)) {
-	System.out.println("fin");
-}
-else
-	for (int l : coup) {
-		
-	//	this.coup.equals(obj)
-			
-		}
-	}
-	/**
-		if (i==5) {
-				System.out.println("Perdu !!");
-			}
-		}
-*/
-		
-		return null ;
-	}
 }

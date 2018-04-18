@@ -1,60 +1,38 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
+import model.Jeupropriete;
 
-import javax.xml.ws.soap.AddressingFeature.Responses;
 
 import strategie.choixMastermindIA;
-public class Simul {
 
-private int nbcoup;
-	private int taillecode;
+public class Simul{
+
+	
+	
+	/** Creation de l'objet propriete dans lequel se trouve les propriete nombre de coup, nombre de bouton,
+	 * strategie de l'algorithme
+	 * mode developpeur
+	 */
+	
+	Jeupropriete j=new Jeupropriete();
 	private CodeS secretCode;
 	private choixMastermindIA strategie;
 	private CodeS guess;
 	protected Properties prop = new Properties();
+
 	
 	public Simul(int taillecode,choixMastermindIA strategie) {
-		this.taillecode=taillecode;
+		this.j.taillecode=taillecode;
 		//	this.secretCode=createRandomCode(this.taillecode);
-		this.secretCode=SecretJoueur(this.taillecode);
+		this.secretCode=SecretJoueur(this.j.taillecode);
 		this.strategie=strategie;	
 	}
 
-
-
 	public Stat run() {
-		InputStream input = null;
-/**chargement du fichier confo.properties */
-		
-		try {
-		input = new FileInputStream("config.properties");
-		prop.load(input);
-		taillecode = Integer.valueOf(prop.getProperty("taillecode"));
-System.out.println(taillecode);
-			nbcoup = Integer.valueOf(prop.getProperty("nbcoup"));
-		//nbrUtilises = new int[Integer.valueOf(prop.getProperty("couleurs"))];
-		
-	} catch (IOException ex) {
-		ex.printStackTrace();
-
-	} finally {
-
-		if (input != null) {
-			try {
-				input.close();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-
-			}
-		}
-	}
 
 		Stat stat=new Stat();
 		CodeS guess=new CodeS();
@@ -62,11 +40,11 @@ System.out.println(taillecode);
 		guess= this.strategie.reset();
 		System.out.println(" code secret "+secretCode.toString());
 		System.out.println(guess.toString());
-		for (int i = 1; i <nbcoup ; i++) {
+		for (int i = 1; i <j.nbcoup ; i++) {
 			Reponse reponse = guess.compare(this.secretCode);
 
 
-			if (reponse.blacks==this.taillecode) {
+			if (reponse.blacks==this.j.taillecode) {
 				System.out.println("L'ordinateur a Gagné en "+i+" coup");
 
 				//this.secretCode=createRandomCode(this.taillecode);
@@ -85,100 +63,61 @@ System.out.println(taillecode);
 
 			}
 
-			guess.get(this.taillecode-1);
+			guess.get(this.j.taillecode-1);
 		}
 
 
 		return stat;
 
 	}
-	public void run2() {
-
+	
+	
+	/**methode pour lancer la simulation de code via L'IA*/
+	
+	public void plusmoinsIA() {
 
 
 		/**creation d'une combinaisaon secret*/
-		guess=this.createRandomCode(taillecode);
 
-		System.out.print("1ere valeur"+guess.toString());
+		guess=this.createRandomCode(4);
+		
 		System.out.println("valeur code secret"+secretCode.toString());
 
+		String val;
+		String val1=secretCode.toString().replace("|", "");
 
-		for (int i = 0; i <nbcoup ; i++) {
-			guess.plusetmoins(this.secretCode);
-			if (this.guess.equals(secretCode)) {
-				System.out.println("bien");
-			
+		for (int i = 0; i <7 ; i++) {
 
-			}
-			else {
-				/**
-				System.out.print("valeur du guess avec this"+this.guess);
-				System.out.println("valeur du guess "+guess);
-				System.out.println("valeur du secret code "+secretCode);
-				System.out.println("pas bien");
-				*/
-				for (int j = 4; j <0; j--) {
-			
-					
-				//	if (this.guess.get(i)<this.secretCode.get(j).values()[j]) {
-				//		System.out.println("voir la valeur"+guess.get(j));
-				//	}
-					if (guess.get(j).i>secretCode.get(j).i) {
-						this.guess.get(j)
-						;
-
-					}
-					if (guess.get(j).i==secretCode.get(j).i) {
-						
-					}
-
-					
-				}
-			}
-
-
-			/**
-
-
-
-
-			System.out.println("valeur du code secret "+secretCode.toString());
-
-
-
-			if (guess.equals(this.secretCode)) {
-
-				System.out.println("vous avez Gagné en "+i+" coup");
+			Reponse reponse=guess.plusetmoins(secretCode);
+			System.out.println("  pour la proposition suivante  "+this.guess);
+			if (reponse.blacks==4) {
+				System.out.println("L'Ordinateur a gagné en "+(i+1)+" tour");
 				break;
+			} else {
 
 			}
-			else {
-				for (int j = 0; j < guess.getLength(); j++) {
-					if (guess.get(j).i<this.secretCode.get(j).i) {
-						guess.get(j).i++;
-					}
-					if (guess.get(j).i>this.secretCode.get(j).i) {
-						guess.get(j).i--;
-
-					}
+			//**boucle ayant pour objectif d'incrementer ou de decrementer selon la reponse final			
+			for (int j = 0; j <4; j++) {
+				if (guess.get(j).i>secretCode.get(j).i) {
+					guess.get(j).i--;
 				}
+				else if (guess.get(j).i<secretCode.get(j).i) {
+					guess.get(j).i++;
+				}
+				else if (guess.get(j).i==secretCode.get(j).i) {
+
+				}
+				
 			}
-
-
-			System.out.println(guess.toString());
-
-			//	
+			
 
 		}
 
-			 */
-			//guess.get(this.taillecode-1);
-		}
 		return ;
 	}
 
 
-
+/**methode de nombre aléatoir */
 	public static CodeS createRandomCode(int length) {
 		Random rnd = new Random();
 		T[] ts = new T[length];
@@ -188,9 +127,10 @@ System.out.println(taillecode);
 		}
 		return new CodeS(ts);
 	}
+/**methode proposant au joueur Humain de saisir un code*/
 	public static CodeS SecretJoueur(int length) {
 		//Random rnd = new Random();
-		System.out.println("combinaison a saisir exemple 2345 puis ENTRER");
+		System.out.println("combinaison a saisir sur "+Jeupropriete.taillecode+" positions");
 		Scanner sj = new Scanner(System.in);
 
 		String val1 = sj.nextLine();
@@ -204,14 +144,10 @@ System.out.println(taillecode);
 	}
 
 
-
-
-
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Simul [taillecode=").append(taillecode).append(", secretCode=").append(secretCode).append("]");
+		builder.append("Simul [taillecode=").append(j.taillecode).append(", secretCode=").append(secretCode).append("]");
 		return builder.toString();
 	}
 

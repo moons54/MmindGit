@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.Duel;
+import model.Jeupropriete;
 import model.Joueur;
 import model.Simul;
 import model.Stat;
@@ -42,21 +43,22 @@ public class Men_plusetmoins {
 public void bouclechoix(int val) throws IOException {
 	switch (val) {
 	case 1:
-		System.out.println("Merci de saisir le code confidentiel ");
-		//Simul sim= new Simul(4,new Knuth2(4));
-		Joueur jo2=new Joueur(4);
-		jo2.run3();
+		System.out.println("Merci de saisir le code Secret ");
+		Simul sim= new Simul(4,new Knuth2(4));
+		sim.plusmoinsIA();
 		replay(val);
 		break;
 	case 2: 
 		System.out.println("Mode challenger");
 		Joueur jo=new Joueur(4);
-		jo.run2();
+		jo.plusmoinsJoueur();
 		replay(val);
 	case 3:
-		System.out.println("Merci de saisir le code confidentiel ");
-		Duel du = new Duel(4,new Knuth2(4));
-		du.run();
+		System.out.println("Merci de saisir le code Secret ");
+		
+	//	Duel du = new Duel(4,new Knuth2(4));
+		Duel du1=new Duel(4,Jeupropriete.getSTRATEGIE1());
+		du1.DuelPlusMoins();
 		replay(val);
 	default:
 		break;

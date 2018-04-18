@@ -1,11 +1,12 @@
 package IHM;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Men_general {
 
+public class Men_general {
+ 
+	
 
 	/**
 	 * Premier ecran IHM dans le cadre du Pattern MVC

@@ -12,13 +12,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
+import model.Jeupropriete;
 
 public class Test1 {
-
+	Jeupropriete j=new Jeupropriete();
+	
 	private static final int taillecode=4;
-	private static final choixMastermindIA STRATEGIE1 = new Knuth2(taillecode);
+	//private static  choixMastermindIA STRATEGIE1 = new Knuth2(taillecode);
 	//	private static final choixMastermindIA STRATEGIE1 = new Simple(taillecode);
-
+	private static  choixMastermindIA STRATEGIE1=Jeupropriete.STRATEGIE1;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
