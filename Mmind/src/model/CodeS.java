@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 
  * @author aurelienmimouni
- *Combinaison generant les codes utilisé dans mastermind
+ *Combinaison générant les codes utilisé dans mastermind
  *methode permettant d'evaluer le scode d'une combinaison
  *vers un autre code ( hypothese dans certain cas ou code secret)
  */
@@ -25,6 +25,8 @@ public class CodeS {
 		this.code = t.clone();
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof CodeS) {
@@ -150,12 +152,15 @@ if (code[i].i ==other.code[i].i) {
 	}
 
 	private static void _createAllCodes(List<CodeS> codes, int length, T[] ts) {
-		if (length == 0) {
+		if (length == 0 ) {
 			codes.add(new CodeS(ts));
 		} else {
 			for (T t : T.values()) {
-				ts[length-1] = t;
+				if (t.i<5) {
+					ts[length-1] = t;
 				_createAllCodes(codes, length - 1, ts);
+				}
+				
 			}
 		}
 	}

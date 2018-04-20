@@ -10,8 +10,10 @@ import model.Joueur;
 import model.Simul;
 import model.Test1;
 import strategie.Knuth2;
+import strategie.Simple;
 import IHM.Men_general;
 import model.Jeupropriete;
+
 
 public class Men_mastermind {
 
@@ -19,8 +21,8 @@ public class Men_mastermind {
 
 
 	public Men_mastermind() throws IOException {
-		
-		
+
+
 		System.out.println("\n"
 				+"\n"+
 				"                  MMMM    MMM       A       SSSSSS  TTTTTTT  EEEEEEE  RRRRR     MMMMM    MMM   I  NN   N   DDD  "+"\n"+
@@ -45,22 +47,53 @@ public class Men_mastermind {
 		bouclechoix(val);
 	}
 	public void bouclechoix(int val) throws IOException {
+		Jeupropriete pro = new Jeupropriete();
 		switch (val) {
 		case 1:
-			System.out.println("Saisie du code Secret ");
-			//Simul sim= new Simul(Jeupropriete.taillecode,  Jeupropriete.STRATEGIE1);
-			Test1.main(null);
+			System.out.println("Mode Defenseur");
+
+			switch (pro.getIAchoix()) {
+			case 1:
+				System.out.println("STRATEGIE KNUTH");
+				Simul sim= new Simul(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()));
+				sim.run();
+				break;
+			case 2:
+				System.out.println("STRATEGIE SIMPLE");
+				Simul sim2= new Simul(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()));
+				sim2.run();
+				break;
+			default:
+
+				break;
+			}
+
 			replay(val);
 			break;
 		case 2: 
 			System.out.println("Mode challenger");
-			Joueur jo=new Joueur(Jeupropriete.taillecode);
+			Joueur jo=new Joueur(pro.getTaillecode());
 			jo.run();
 			replay(val);
 		case 3:
-			System.out.println("Merci de saisir le code confidentiel ");
-			Duel du = new Duel(4,new Knuth2(4));
-			du.run();
+			System.out.println("Mode DUEL");
+			switch (pro.getIAchoix()) {
+			case 1:
+				System.out.println("STRATEGIE KNUTH");
+				Duel du= new Duel(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()));
+				du.run();
+				break;
+			case 2:
+				System.out.println("STRATEGIE SIMPLE");
+				Duel du1= new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()));
+				du1.run();
+				break;
+			default:
+
+				break;
+			}
+
+
 			replay(val);
 		default:
 			break;

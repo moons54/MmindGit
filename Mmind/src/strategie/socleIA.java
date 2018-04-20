@@ -46,8 +46,8 @@ public abstract class socleIA  implements choixMastermindIA{
 		this.lhypothese.addAll(this.allcodes);
 		
 		this.dernieressai=Simul.createRandomCode(taillecode);
-		
 		this.dernieressai.get(this.taillecode-1);
+	//	this.dernieressai.get(this.taillecode);
 		return this.dernieressai;
 		
 	}

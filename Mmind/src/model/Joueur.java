@@ -16,16 +16,17 @@ public class Joueur {
 	private CodeS secretCode;
 	private CodeS guess;
 	private int chiffre;
-	//private int coup[]=new int[4];
-	//private int code[]=new int[4];
-	//public int coup[]= {5,5,5,5};
+	private Jeupropriete pro=new Jeupropriete();
+	
+	
 	public Joueur(int taillecode) {
 		this.taillecode=taillecode;
 		this.secretCode=createRandomCode(this.taillecode);
 		//	this.guess=HypotheseJoueur(this.taillecode);
 
 	}
-	/**methode de jeu pour Mastermind joueur : decodeur ordinateur : codeur*/
+	/**methode de jeu pour Mastermind joueur : decodeur ordinateur : codeur humain*/
+
 	public Joueur run() {
 
 		System.out.println(" code secret "+secretCode.toString());
@@ -33,7 +34,7 @@ public class Joueur {
 		CodeS guess=new CodeS();
 
 
-		for (int i = 1; i <6 ; i++) {
+		for (int i = 1; i <pro.getNbcoup() ; i++) {
 
 			guess=this.HypotheseJoueur(taillecode);
 
@@ -45,8 +46,6 @@ public class Joueur {
 				System.out.println("vous avez Gagné en "+i+" coup");
 
 
-				//this.secretCode=createRandomCode(this.taillecode);
-				//	guess= this.strategie.reset();
 
 				break;
 
@@ -103,7 +102,7 @@ public class Joueur {
 
 		System.out.println(" code secret "+secretCode.toString());
 
-		for (int i = 1; i <6 ; i++) {
+		for (int i = 1; i <pro.getNbcoup() ; i++) {
 
 
 			guess=this.HypotheseJoueur(taillecode);
