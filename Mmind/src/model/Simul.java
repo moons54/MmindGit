@@ -1,12 +1,13 @@
 package model;
 
 
-import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
-import model.Jeupropriete;
+import java.util.logging.LogManager;
 
-
+import com.sun.javafx.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import strategie.choixMastermindIA;
 
 public class Simul{
@@ -34,6 +35,7 @@ public class Simul{
 	}
 
 	public Stat run() {
+		private static final Logger LOGGER = LogManager.getLogger();
 
 		Stat stat=new Stat();
 		CodeS guess=new CodeS();
@@ -50,7 +52,7 @@ public class Simul{
 				System.out.println("_____________________________");
 				System.out.println("L'ordinateur a Gagné en "+i+" coup");
 				System.out.println("_____________________________");
-
+stat.count();
 				guess= this.strategie.reset();
 				break;
 			}else {

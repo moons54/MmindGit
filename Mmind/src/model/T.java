@@ -8,8 +8,8 @@ public enum T {
 	T4(4),
 	T5(5),
 	T6(6),
-	T7(7);
-//	T8(8);
+	T7(7),
+	T8(8);
 	
 	
 	public int i;

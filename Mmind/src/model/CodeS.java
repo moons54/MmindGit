@@ -152,11 +152,12 @@ if (code[i].i ==other.code[i].i) {
 	}
 
 	private static void _createAllCodes(List<CodeS> codes, int length, T[] ts) {
+		Jeupropriete pro = new Jeupropriete();
 		if (length == 0 ) {
 			codes.add(new CodeS(ts));
 		} else {
 			for (T t : T.values()) {
-				if (t.i<5) {
+				if (t.i<pro.getNbchiffre()) {
 					ts[length-1] = t;
 				_createAllCodes(codes, length - 1, ts);
 				}

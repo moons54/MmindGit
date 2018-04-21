@@ -7,10 +7,13 @@ import java.util.logging.LogManager;
 
 
 import com.sun.javafx.logging.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import IHM.Men_general;
 
 public class Demarrage {
+
+		static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) throws IOException {
 
@@ -25,9 +28,8 @@ public class Demarrage {
 		 * 
 		 * 
 		 */
-
-
-
+		
+        
 		Properties prop = new Properties();
 
 		InputStream input = null;
@@ -41,6 +43,13 @@ public class Demarrage {
 			 * On charge le fichier.
 			 */
 			prop.load(input);
+			
+			logger.trace("msg de trace"); 
+
+	        System.out.println( "Hello dude!" );
+
+	        logger.trace("msg de trace2"); 
+	        
 
 		} catch (IOException ex) {
 

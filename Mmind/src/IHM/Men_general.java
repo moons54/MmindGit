@@ -36,6 +36,8 @@ public class Men_general {
 				"\n"+"1  == MASTERMIND"+
 				"\n"+"------------------------------------------------"+
 				"\n"+"2  == MODE JEU ALTERNATIF LES PLUS ET LE MOINS"+
+				"\n"+"------------------------------------------------"+
+				"\n"+"3  == Quitter"+
 				"\n"+"------------------------------------------------");
 
 
@@ -59,7 +61,14 @@ public class Men_general {
 		}
 		new Men_plusetmoins();
 		
+		case 3:
+			System.out.println("Merci d'avoir joué. fin de partie");
+			break;
+		
+		
+		
 		default:
+			
 			break;
 		}
 

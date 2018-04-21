@@ -18,15 +18,19 @@ public class Duel {
 	private CodeS secretCode1;
 	private CodeS guess;
 	private Jeupropriete pro=new Jeupropriete();
-
+private static  int nbdechiffre;
+private  boolean modedeveloppeur;
 	private choixMastermindIA strategie;
+	private int nbdecoup;
 
 
-
-	public Duel(int taillecode,choixMastermindIA strategie) {
+	public Duel(int taillecode,choixMastermindIA strategie,int nbdechiffre,boolean modedeveloppeur,int nbdecoup) {
 		this.taillecode=taillecode;
-		this.secretCode=createRandomCode(this.taillecode);
+		
+		this.secretCode=createRandomCode(this.taillecode,this.nbdechiffre);
 		this.secretCode1=SecretJoueur(this.taillecode);
+		this.nbdechiffre=nbdechiffre;
+		this.nbdecoup=nbdecoup;
 		//this.guess=HypotheseJoueur(this.taillecode);
 		this.strategie=strategie;
 
@@ -39,17 +43,26 @@ public class Duel {
 
 	public Duel run() {
 
-
-		System.out.println(" Code secret de crée par le joueur 1 : Humain "+secretCode1.toString());
-		System.out.println("Code secret de crée par le joueur 2 : Ordinateur "+secretCode.toString());
-
-		//Declaration hypothese du joueur
+		if (modedeveloppeur=true) {
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de coup:" + nbdecoup);
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de Chiffre :" + nbdechiffre);
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de Bouton :" + taillecode);
+			System.out.println("_____________________________________________");
+			System.out.println(" code secret generé par joueur 1"+secretCode1.toString());
+			System.out.println("_____________________________________________");
+			System.out.println(" code secret generé par joueur 2"+secretCode.toString());
+			System.out.println("_____________________________________________");
+		}
+			//Declaration hypothese du joueur
 		CodeS guess1=new CodeS();
 		guess1= this.strategie.reset();
 
 
 		/** boucle pour les combinaison duel du joueur et IA*/
-		for (int i = 1; i < pro.getNbcoup(); i++) {
+		for (int i = 1; i < nbdecoup; i++) {
 			System.out.println("----------------------------------------------");
 			System.out.println("Tour Numéro "+i);
 
@@ -106,13 +119,24 @@ public class Duel {
 	}
 	public Duel DuelPlusMoins() {
 
-
-		System.out.println(" Code secret de crée par le joueur 1 : Humain "+secretCode1.toString());
-		System.out.println("Code secret de crée par le joueur 2 : Ordinateur "+secretCode.toString());
-
+		if (modedeveloppeur=true) {
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de coup:" + nbdecoup);
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de Chiffre :" + nbdechiffre);
+			System.out.println("_____________________________________________");
+			System.out.println("Nombre de Bouton :" + taillecode);
+			System.out.println("_____________________________________________");
+			System.out.println(" code secret generé par joueur 1"+secretCode1.toString());
+			System.out.println("_____________________________________________");
+			System.out.println(" code secret generé par joueur 2"+secretCode.toString());
+			System.out.println("_____________________________________________");
+		}
+		
+		
 		//Declaration hypothese du joueur
 		CodeS guess1=new CodeS();
-		guess1= this.createRandomCode(pro.getTaillecode());
+		guess1= this.createRandomCode(taillecode,nbdechiffre);
 
 
 		/** boucle pour les combinaison duel du joueur et IA*/
@@ -194,12 +218,13 @@ public class Duel {
 		return new CodeS(ts);
 	}
 	//methode utilisée pour creer une combinaison aléatoire.
-	public static CodeS createRandomCode(int length) {
+	public static CodeS createRandomCode(int length,int nbdechiffre) {
 		Random rnd = new Random();
 		T[] ts = new T[length];
 		for (int i = 0; i < length; i++) {
-			ts[i] = T.values()[rnd.nextInt(8)];
-
+			
+				ts[i] = T.values()[rnd.nextInt(nbdechiffre)];
+	
 		}
 		return new CodeS(ts);
 	}

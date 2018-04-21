@@ -8,8 +8,9 @@ import model.Jeupropriete;
 import model.Joueur;
 import model.Simul;
 import model.Stat;
-import model.Test1;
+
 import strategie.Knuth2;
+import strategie.Simple;
 
 public class Men_plusetmoins {
 
@@ -41,6 +42,7 @@ public class Men_plusetmoins {
 	}
 
 	public void bouclechoix(int val) throws IOException {
+		Jeupropriete pro = new Jeupropriete();
 		switch (val) {
 		case 1:
 			System.out.println("Merci de saisir le code Secret ");
@@ -50,7 +52,7 @@ public class Men_plusetmoins {
 			break;
 		case 2: 
 			System.out.println("Mode challenger");
-			Joueur jo=new Joueur(4);
+			Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 			jo.plusmoinsJoueur();
 			replay(val);
 		case 3:
@@ -63,7 +65,7 @@ public class Men_plusetmoins {
 					+"Objectif : Trouver la combinaison secrete en premier");
 
 			//	Duel du = new Duel(4,new Knuth2(4));
-			Duel du1=new Duel(4,Jeupropriete.getSTRATEGIE1());
+			Duel du1=new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 			du1.DuelPlusMoins();
 			replay(val);
 		default:
@@ -90,6 +92,7 @@ public class Men_plusetmoins {
 
 		default:
 			System.out.println("Fin de partie");
+			
 			break;
 		}	
 

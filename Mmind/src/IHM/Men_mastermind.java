@@ -8,11 +8,11 @@ import model.Duel;
 import model.Jeupropriete;
 import model.Joueur;
 import model.Simul;
-import model.Test1;
+import model.Stat;
 import strategie.Knuth2;
 import strategie.Simple;
 import IHM.Men_general;
-import model.Jeupropriete;
+
 
 
 public class Men_mastermind {
@@ -72,20 +72,20 @@ public class Men_mastermind {
 			break;
 		case 2: 
 			System.out.println("Mode challenger");
-			Joueur jo=new Joueur(pro.getTaillecode());
-			jo.run();
+			Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+			jo.Mastermind();
 			replay(val);
 		case 3:
 			System.out.println("Mode DUEL");
 			switch (pro.getIAchoix()) {
 			case 1:
 				System.out.println("STRATEGIE KNUTH");
-				Duel du= new Duel(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()));
+				Duel du= new Duel(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 				du.run();
 				break;
 			case 2:
 				System.out.println("STRATEGIE SIMPLE");
-				Duel du1= new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()));
+				Duel du1= new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 				du1.run();
 				break;
 			default:
@@ -102,6 +102,7 @@ public class Men_mastermind {
 	}
 
 	public void replay(int val) throws IOException {
+		Stat stat= new Stat();
 		System.out.println("Souhaitez vous ?"
 				+"\n"+"1____Rejouer une partie"
 				+"\n"+"2____Changer de jeu"
@@ -119,6 +120,7 @@ public class Men_mastermind {
 
 		default:
 			System.out.println("Fin de partie");
+			//System.out.println("nombre de partie gagné : "+ stat.getGagnepartour());
 			break;
 		}	
 

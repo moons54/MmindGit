@@ -9,19 +9,23 @@ import strategie.Simple;
 import strategie.choixMastermindIA;
 
 
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Jeupropriete {
 	
 private  static int taillecode=0;	
 private  static int nbcoup;
-
+private static int nbchiffre;
 private static int IAchoix;
+private static Boolean modedeveloppeur;
 protected Properties prop = new Properties();
 	
 	
 	
 public Jeupropriete() {	
+	
+	static final Logger logger = LogManager.getLogger();
 	InputStream input = null;
 /**chargement du fichier confo.properties */
 		
@@ -31,9 +35,9 @@ public Jeupropriete() {
 		taillecode = Integer.valueOf(prop.getProperty("taillecode"));
 		nbcoup = Integer.valueOf(prop.getProperty("nbcoup"));
 			 IAchoix= Integer.valueOf(prop.getProperty("choixIA"));
-			
-			
-		//nbrUtilises = new int[Integer.valueOf(prop.getProperty("couleurs"))];
+			 nbchiffre=Integer.valueOf(prop.getProperty("nbchiffre"));
+			 modedeveloppeur=Boolean.valueOf(prop.getProperty("modedeveloppeur"));
+		
 		
 	} catch (IOException ex) {
 		ex.printStackTrace();
@@ -70,6 +74,18 @@ public static int getNbcoup() {
 
 public static int getIAchoix() {
 	return IAchoix;
+}
+
+
+
+public static int getNbchiffre() {
+	return nbchiffre;
+}
+
+
+
+public static Boolean getModedeveloppeur() {
+	return modedeveloppeur;
 }
 	
 	
