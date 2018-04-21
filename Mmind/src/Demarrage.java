@@ -44,11 +44,9 @@ public class Demarrage {
 			 */
 			prop.load(input);
 			
-			logger.trace("msg de trace"); 
+			logger.trace("fichier propriete lancé"); 
 
-	        System.out.println( "Hello dude!" );
-
-	        logger.trace("msg de trace2"); 
+	        
 	        
 
 		} catch (IOException ex) {
