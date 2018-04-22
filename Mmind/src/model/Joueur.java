@@ -8,10 +8,12 @@ import java.util.Scanner;
 import IHM.Men_general;
 import model.CodeS;
 import model.Reponse;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Joueur {
 	
+	private static final Logger logger = LogManager.getLogger(Joueur.class);
 	private static int nbdecoup;
 	private static int taillecode;
 	private CodeS secretCode;
@@ -33,6 +35,9 @@ public class Joueur {
 
 	public Joueur Mastermind() {
 
+		if (logger.isDebugEnabled()) {
+			logger.debug("entering Mastermind()");
+		}
 		if (modedeveloppeur=true) {
 			System.out.println("__________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
@@ -78,10 +83,19 @@ public class Joueur {
 		}
 
 
+		if (logger.isDebugEnabled()) {
+			logger.debug("exiting Mastermind()");
+			logger.debug("returning: " + null);
+		}
 		return null ;
 	}
 
 	public static CodeS HypotheseJoueur(int length,int nbdechiffre) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("entering HypotheseJoueur(int,int)");
+			logger.debug("length: " + length);
+			logger.debug("nbdechiffre: " + nbdechiffre);
+		}
 		Scanner sc1= new Scanner(System.in);
 
 		System.out.println("code a saisir exemple sur "+length+ " positions puis ENTRER");
@@ -94,15 +108,28 @@ public class Joueur {
 	
 		}
 
+		if (logger.isDebugEnabled()) {
+			logger.debug("exiting HypotheseJoueur()");
+			logger.debug("returning: " + new CodeS(ts));
+		}
 		return new CodeS(ts);
 	}
 
 	public static CodeS createRandomCode(int length,int nbdechiffre) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("entering createRandomCode(int,int)");
+			logger.debug("length: " + length);
+			logger.debug("nbdechiffre: " + nbdechiffre);
+		}
 		Random rnd = new Random();
 		T[] ts = new T[length];
 		for (int i = 0; i < length; i++) {
 			ts[i] = T.values()[rnd.nextInt(nbdechiffre)];
 
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug("exiting createRandomCode()");
+			logger.debug("returning: " + new CodeS(ts));
 		}
 		return new CodeS(ts);
 	}
@@ -117,6 +144,9 @@ public class Joueur {
 	public Joueur plusmoinsJoueur() {
 
 		
+		if (logger.isDebugEnabled()) {
+			logger.debug("entering plusmoinsJoueur()");
+		}
 		if (modedeveloppeur=true) {
 			System.out.println("__________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
@@ -155,6 +185,10 @@ public class Joueur {
 
 		guess.get(this.taillecode-1);
 
+		if (logger.isDebugEnabled()) {
+			logger.debug("exiting plusmoinsJoueur()");
+			logger.debug("returning: " + null);
+		}
 		return null ;
 	}
 

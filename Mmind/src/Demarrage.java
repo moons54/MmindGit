@@ -3,17 +3,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
-import java.util.logging.LogManager;
-
-
-import com.sun.javafx.logging.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import IHM.Men_general;
 
 public class Demarrage {
 
-		static final Logger logger = LogManager.getLogger();
+	
+	
+	//declaration du looger l'ensemble des evt d'information sont enregitré dans fichier all.log 
+	static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) throws IOException {
 
@@ -28,10 +27,11 @@ public class Demarrage {
 		 * 
 		 * 
 		 */
-		
-        
+
+
 		Properties prop = new Properties();
 
+		
 		InputStream input = null;
 
 		OutputStream output = null;
@@ -43,11 +43,11 @@ public class Demarrage {
 			 * On charge le fichier.
 			 */
 			prop.load(input);
-			
-			logger.trace("fichier propriete lancé"); 
 
-	        
-	        
+
+
+
+
 
 		} catch (IOException ex) {
 
@@ -84,7 +84,10 @@ public class Demarrage {
 			}
 
 		}
-
+		logger.info("fichier propriete lancé"); 
+		
+		
+		//lancement du menu général situa dans IHM
 		new Men_general();
 
 	}

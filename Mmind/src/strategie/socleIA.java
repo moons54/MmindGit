@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.CodeS;
 import model.Reponse;
-import model.Simul;
+import model.IA;
 import model.T;
 
 public abstract class socleIA  implements choixMastermindIA{
@@ -45,7 +45,7 @@ public abstract class socleIA  implements choixMastermindIA{
 		this.lhypothese.clear();
 		this.lhypothese.addAll(this.allcodes);
 		
-		this.dernieressai=Simul.createRandomCode(taillecode);
+		this.dernieressai=IA.createRandomCode(taillecode);
 		this.dernieressai.get(this.taillecode-1);
 	//	this.dernieressai.get(this.taillecode);
 		return this.dernieressai;

@@ -3,9 +3,8 @@ package model;
 
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import model.CodeS;
 import model.Reponse;
 import strategie.choixMastermindIA;
@@ -18,7 +17,7 @@ public class Duel {
 	private CodeS secretCode1;
 	private CodeS guess;
 	private Jeupropriete pro=new Jeupropriete();
-private static  int nbdechiffre;
+public static  int nbdechiffre1;
 private  boolean modedeveloppeur;
 	private choixMastermindIA strategie;
 	private int nbdecoup;
@@ -26,10 +25,9 @@ private  boolean modedeveloppeur;
 
 	public Duel(int taillecode,choixMastermindIA strategie,int nbdechiffre,boolean modedeveloppeur,int nbdecoup) {
 		this.taillecode=taillecode;
-		
-		this.secretCode=createRandomCode(this.taillecode,this.nbdechiffre);
+		this.secretCode=createRandomCode(this.taillecode);
 		this.secretCode1=SecretJoueur(this.taillecode);
-		this.nbdechiffre=nbdechiffre;
+		this.nbdechiffre1=nbdechiffre;
 		this.nbdecoup=nbdecoup;
 		//this.guess=HypotheseJoueur(this.taillecode);
 		this.strategie=strategie;
@@ -40,14 +38,20 @@ private  boolean modedeveloppeur;
 	 * 
 	 * @return
 	 */
-
+	static final Logger logger = LogManager.getLogger();
+	
+	
 	public Duel run() {
 
+		logger.info("Lancement partie : Duel MASTERMIND");
 		if (modedeveloppeur=true) {
+			logger.info("mode developpeur activé");
+			logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre1+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
+
 			System.out.println("_____________________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
 			System.out.println("_____________________________________________");
-			System.out.println("Nombre de Chiffre :" + nbdechiffre);
+			System.out.println("Nombre de Chiffre :" + nbdechiffre1);
 			System.out.println("_____________________________________________");
 			System.out.println("Nombre de Bouton :" + taillecode);
 			System.out.println("_____________________________________________");
@@ -83,7 +87,9 @@ private  boolean modedeveloppeur;
 			//condition controlant dans un premier temps el joueur1 : humain
 			//si reponse juste alors fin de la partie
 			if (reponse.blacks==this.taillecode) {
+				logger.info("partie gagné par le joueur 1 humain  "+guess);
 				System.out.println("vous avez Gagné en "+(i+1)+" coup");
+				
 				break;
 			}
 			else {
@@ -94,6 +100,7 @@ private  boolean modedeveloppeur;
 			if (reponse1.blacks==this.taillecode) {
 				System.out.println(guess1);
 				System.out.println("L'IA a gagné en "+(i+1)+" coup");
+				logger.info("partie gagné par le joueur 2 ordinateur  "+guess);
 				guess1= this.strategie.reset();
 				break;
 			}else {
@@ -105,6 +112,7 @@ private  boolean modedeveloppeur;
 				//System.out.println();
 				guess1.get(this.taillecode-1);
 				if (i==pro.getNbcoup()) {
+					logger.info("pas de gagnant en mode duel");
 					System.out.println("Pas de Gagnant sur cette Partie");
 				}
 			}
@@ -118,12 +126,15 @@ private  boolean modedeveloppeur;
 		return null;
 	}
 	public Duel DuelPlusMoins() {
-
+		logger.trace("Lancement partie : Duel PLUSMOINS");
 		if (modedeveloppeur=true) {
+			logger.info("mode developpeur activé");
+			logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre1+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
+
 			System.out.println("_____________________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
 			System.out.println("_____________________________________________");
-			System.out.println("Nombre de Chiffre :" + nbdechiffre);
+			System.out.println("Nombre de Chiffre :" + nbdechiffre1);
 			System.out.println("_____________________________________________");
 			System.out.println("Nombre de Bouton :" + taillecode);
 			System.out.println("_____________________________________________");
@@ -136,11 +147,11 @@ private  boolean modedeveloppeur;
 		
 		//Declaration hypothese du joueur
 		CodeS guess1=new CodeS();
-		guess1= this.createRandomCode(taillecode,nbdechiffre);
+		guess1= this.createRandomCode(taillecode);
 
 
 		/** boucle pour les combinaison duel du joueur et IA*/
-		for (int i = 1; i <pro.getNbcoup() ; i++) {
+		for (int i = 1; i <nbdecoup ; i++) {
 			System.out.println("----------------------------------------------");
 			System.out.println("Tour Numéro "+(i));
 
@@ -166,6 +177,7 @@ private  boolean modedeveloppeur;
 			//condition verifiant la reponse du joueur 1 : humain si celle ci est juste alors fin de partie
 			if (reponse.blacks==this.pro.getTaillecode()) {
 				System.out.println("vous avez Gagné en "+i+" coup");
+				logger.info("partie gagné par le joueur 1 humain  "+guess);
 				break;
 
 			}
@@ -176,6 +188,7 @@ private  boolean modedeveloppeur;
 			if (reponse1.blacks==this.pro.getTaillecode()) {
 				System.out.println(guess1);
 				System.out.println("Joueur II : l'ordinateur gagne en "+i+" coup");
+				logger.info("partie gagné par l'ordinateur  "+guess);
 				break;
 			}
 			else {
@@ -195,8 +208,9 @@ private  boolean modedeveloppeur;
 				}
 
 
-				if (i==pro.getNbcoup()) {
+				if (i==nbdecoup) {
 					System.out.println("Personne a trouvé la combinaison");
+					logger.info("partie sans gagnant");
 				}
 			}
 
@@ -217,18 +231,16 @@ private  boolean modedeveloppeur;
 		}
 		return new CodeS(ts);
 	}
-	//methode utilisée pour creer une combinaison aléatoire.
-	public static CodeS createRandomCode(int length,int nbdechiffre) {
+	/**methode de nombre aléatoire */
+	public static CodeS createRandomCode(int length) {
 		Random rnd = new Random();
 		T[] ts = new T[length];
 		for (int i = 0; i < length; i++) {
-			
-				ts[i] = T.values()[rnd.nextInt(nbdechiffre)];
-	
+			ts[i] = T.values()[rnd.nextInt(8)];
+
 		}
 		return new CodeS(ts);
 	}
-
 
 	//methode utilisée pour creer un code secret 
 	public static CodeS SecretJoueur(int length) {
@@ -243,6 +255,9 @@ private  boolean modedeveloppeur;
 
 		}
 		return new CodeS(ts);
+	}
+	public static int getNbdechiffre1() {
+		return nbdechiffre1;
 	}
 }
 

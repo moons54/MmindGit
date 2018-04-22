@@ -1,13 +1,15 @@
 package IHM;
 
 import java.io.IOException;
-import java.util.Properties;
-import java.util.Scanner;
 
+import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import model.Duel;
+import model.IA;
 import model.Jeupropriete;
 import model.Joueur;
-import model.Simul;
+
 import model.Stat;
 import strategie.Knuth2;
 import strategie.Simple;
@@ -18,10 +20,11 @@ import IHM.Men_general;
 public class Men_mastermind {
 
 
+	static final Logger logger = LogManager.getLogger();
+
 
 
 	public Men_mastermind() throws IOException {
-
 
 		System.out.println("\n"
 				+"\n"+
@@ -43,60 +46,68 @@ public class Men_mastermind {
 
 		Scanner sc = new Scanner(System.in);
 
-		int val = sc.nextInt();
-		bouclechoix(val);
+		int val1 = sc.nextInt();
+		bouclechoix(val1);
 	}
 	public void bouclechoix(int val) throws IOException {
 		Jeupropriete pro = new Jeupropriete();
-		switch (val) {
-		case 1:
-			System.out.println("Mode Defenseur");
-
-			switch (pro.getIAchoix()) {
+		try {
+			switch (val) {
 			case 1:
-				System.out.println("STRATEGIE KNUTH");
-				Simul sim= new Simul(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()));
-				sim.run();
-				break;
-			case 2:
-				System.out.println("STRATEGIE SIMPLE");
-				Simul sim2= new Simul(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()));
-				sim2.run();
-				break;
-			default:
+				System.out.println("Mode Defenseur");
 
+				switch (pro.getIAchoix()) {
+				case 1:
+					System.out.println("STRATEGIE KNUTH");
+					IA sim= new IA(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+					sim.IAmastermind();
+					break;
+				case 2:
+					System.out.println("STRATEGIE SIMPLE");
+					IA sim2= new IA(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+					sim2.IAmastermind();
+					break;
+				default:
+
+					break;
+				}
+
+				replay(val);
+				break;
+			case 2: 
+				System.out.println("Mode challenger");
+				Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+				jo.Mastermind();
+				replay(val);
+				break;
+			case 3:
+				System.out.println("Mode DUEL");
+				switch (pro.getIAchoix()) {
+				case 1:
+					System.out.println("STRATEGIE KNUTH");
+					Duel du= new Duel(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+					du.run();
+					break;
+				case 2:
+					System.out.println("STRATEGIE SIMPLE");
+					System.out.println("val chiffre"+pro.getNbchiffre());
+					Duel du1= new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
+					du1.run();
+					break;
+				default:
+
+					break;
+				}
+
+
+				replay(val);
+			default:
 				break;
 			}
-
-			replay(val);
-			break;
-		case 2: 
-			System.out.println("Mode challenger");
-			Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
-			jo.Mastermind();
-			replay(val);
-		case 3:
-			System.out.println("Mode DUEL");
-			switch (pro.getIAchoix()) {
-			case 1:
-				System.out.println("STRATEGIE KNUTH");
-				Duel du= new Duel(Jeupropriete.getTaillecode(),   new Knuth2(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
-				du.run();
-				break;
-			case 2:
-				System.out.println("STRATEGIE SIMPLE");
-				Duel du1= new Duel(Jeupropriete.getTaillecode(),   new Simple(Jeupropriete.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
-				du1.run();
-				break;
-			default:
-
-				break;
-			}
-
-
-			replay(val);
-		default:
-			break;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.catching(e);
 		}
 
 	}
@@ -111,17 +122,27 @@ public class Men_mastermind {
 		Scanner scc= new Scanner(System.in);
 
 		int retourchoix=scc.nextInt();
-		switch (retourchoix) {
-		case 1:
-			bouclechoix(val);
-			break;
-		case 2:
-			new Men_general();
 
-		default:
-			System.out.println("Fin de partie");
-			//System.out.println("nombre de partie gagné : "+ stat.getGagnepartour());
-			break;
+		try {
+			switch (retourchoix) {
+			case 1:
+				bouclechoix(val);
+				break;
+			case 2:
+				new Men_general();
+			case 3:
+
+				System.out.println("fin de partie");
+				break;
+			default:
+
+				//System.out.println("nombre de partie gagné : "+ stat.getGagnepartour());
+				break;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.catching(e);
 		}	
 
 	}

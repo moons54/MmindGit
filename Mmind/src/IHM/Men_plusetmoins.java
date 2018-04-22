@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.Duel;
+import model.IA;
 import model.Jeupropriete;
 import model.Joueur;
-import model.Simul;
 import model.Stat;
 
 import strategie.Knuth2;
@@ -46,7 +46,7 @@ public class Men_plusetmoins {
 		switch (val) {
 		case 1:
 			System.out.println("Merci de saisir le code Secret ");
-			Simul sim= new Simul(4,new Knuth2(4));
+			IA sim= new IA(pro.getTaillecode(),new Knuth2(pro.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 			sim.plusmoinsIA();
 			replay(val);
 			break;

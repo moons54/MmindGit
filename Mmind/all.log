@@ -1,0 +1,5 @@
+2018-04-23 01:29:05.194 [main] INFO  Demarrage - fichier propriete lancé
+2018-04-23 01:29:11.509 [main] TRACE model.Duel - Lancement partie : Duel PLUSMOINS
+2018-04-23 01:29:11.509 [main] INFO  model.Duel - mode developpeur activé
+2018-04-23 01:29:11.509 [main] DEBUG model.Duel - nb de coup 9  nombre de chiffre 8 nombre de bouton 4 code secret |5||0||5||6|
+2018-04-23 01:29:27.913 [main] INFO  model.Duel - partie gagné par le joueur 1 humain  |5||0||5||6|
