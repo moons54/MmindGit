@@ -4,7 +4,8 @@ MASTERMIND/ COMBINAISON +et-
 
 
 Demarrage du jeu :
-Lancer Demarrage.java
+Lancer Demarrage.java dans package par defaut
+l'ensemble de l'application se déroule dans system.output
 
 Deux Application en une :
 
@@ -27,6 +28,11 @@ possibilité dans ce cas de modifier le nombre de case secrete, le nombre d'essa
  
 plus spécifiquement pour Mastermind : le nombre de couleur.
 
+point clé Stratégie :
+
+Il est possible de choisir entre deux algorithmes parametrable dans config.properties: 
+choix 1 : algorithme de knuth ( permet d'obtenir sur 5 chiffres et 4 boutons le meilleur resultat possible en nombre de coup.
+choix 2 : algorithme simple ( permet d'aller au dela de 4 boutons 6 chiffres mais presente plus de coup en dessous de ce seuil.
 
 
 
