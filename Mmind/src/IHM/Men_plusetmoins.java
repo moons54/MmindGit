@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import model.Duel;
+import model.Erreur;
 import model.IA;
 import model.Jeupropriete;
 import model.Joueur;
@@ -35,15 +36,25 @@ public class Men_plusetmoins {
 			"\n"+"------------------------------------------------------------------------"+
 			"\n"+"Votre choix : ");
 
-		Scanner sc = new Scanner(System.in);
+		
 
-		int val = sc.nextInt();
-		bouclechoix(val);
-	}
+		int val = 0;
+		do {
+			Scanner sc = new Scanner(System.in);
+			if(!sc.hasNextInt()) {
+				Erreur.erreurChoix();
+				continue;
+				}
+		
+				
+		
+	val=sc.nextInt();
 
-	public void bouclechoix(int val) throws IOException {
+	
 		Jeupropriete pro = new Jeupropriete();
+		
 		switch (val) {
+		
 		case 1:
 			System.out.println("Merci de saisir le code Secret ");
 			IA sim= new IA(pro.getTaillecode(),new Knuth2(pro.getTaillecode()),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
@@ -55,6 +66,7 @@ public class Men_plusetmoins {
 			Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 			jo.plusmoinsJoueur();
 			replay(val);
+			break;
 		case 3:
 			System.out.println("Mode DUEL "+"\n"
 					+"____________________________"+"\n"
@@ -71,31 +83,44 @@ public class Men_plusetmoins {
 		default:
 			break;
 		}
+		
+		}while (val != 1 && val != 2 && val != 3 );
 
 	}
 
 	public void replay(int val) throws IOException {
+		Stat stat= new Stat();
 		System.out.println("Souhaitez vous ?"
 				+"\n"+"1____Rejouer une partie"
 				+"\n"+"2____Changer de jeu"
 				+"\n"+"3____Quitter l'application");
 
-		Scanner scc= new Scanner(System.in);
+		int retourchoix=0;
+		do {
+			Scanner scc= new Scanner(System.in);
+			if(!scc.hasNextInt()) {
+				Erreur.erreurChoix();
+				continue;
+			}
+			retourchoix=scc.nextInt();
+			Jeupropriete pro=new Jeupropriete();
 
-		int retourchoix=scc.nextInt();
-		switch (retourchoix) {
-		case 1:
-			bouclechoix(val);
-			break;
-		case 2:
-			new Men_general();
+			switch (retourchoix) {
+			case 1:
+				new Men_mastermind();
+				break;
+			case 2:
+				new Men_general();
+			case 3:
 
-		default:
-			System.out.println("Fin de partie");
-			
-			break;
-		}	
+				System.out.println("fin de partie");
+				break;
+			default:
+				Erreur.erreurChoix();
+				break;
+			}
 
+		}while(retourchoix !=1 && retourchoix !=2 && retourchoix !=3 );
 	}
 }
 

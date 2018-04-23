@@ -3,6 +3,8 @@ package IHM;
 import java.io.IOException;
 import java.util.Scanner;
 
+import model.Erreur;
+
 
 public class Men_general {
  
@@ -39,17 +41,23 @@ public class Men_general {
 				"\n"+"------------------------------------------------"+
 				"\n"+"3  == Quitter"+
 				"\n"+"------------------------------------------------");
-
+		
+		int val=0;
+		do {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Votre choix");
-		int val = sc.nextInt();
-		System.out.print("++");
-
-
+		
+		
+		if(!sc.hasNextInt()) {
+			Erreur.erreurChoix();
+			continue;
+		}
+	 val = sc.nextInt();
 		switch (val) {
+		
+		
 		case 1:System.out.println("MASTERMIND  2018");
-
 		for (int i = 0; i < espace; i++) {
 			System.out.println();
 		}
@@ -68,12 +76,11 @@ public class Men_general {
 		
 		
 		default:
-			
+			Erreur.erreurChoix();
 			break;
 		}
 
 
-
+	}while (val != 1 && val != 2 && val != 3 );
 	}
-
 }

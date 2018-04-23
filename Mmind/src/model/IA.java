@@ -29,7 +29,7 @@ public class IA{
 
 	/**declaration de la metodeIA permettant le choix du mode de strategie*/
 
-	public IA(int taillecode,choixMastermindIA strategie,int nbdechiffre,boolean modedeveloppeur,int nbdecoup) {
+	public IA(int taillecode,choixMastermindIA strategie,int nbdechiffre,int modedeveloppeur,int nbdecoup) {
 		this.taillecode=taillecode;
 		this.secretCode=SecretJoueur(this.taillecode);
 		this.nbdechiffre=nbdechiffre;
@@ -42,7 +42,8 @@ public class IA{
 
 
 		logger.info("lancement du jeu : Defenseur mastermind");
-		if (modedeveloppeur=true) {
+		
+		if (pro.getModedeveloppeur()==1) {
 			logger.info("mode developpeur activé");
 logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
 			System.out.println("_____________________________________________");
@@ -55,6 +56,7 @@ logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre+ " 
 			System.out.println(" code secret generé par joueur 2"+secretCode.toString());
 			System.out.println("_____________________________________________");
 		}
+		
 
 		Stat stat=new Stat();
 		CodeS guess=new CodeS();
@@ -103,7 +105,7 @@ logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre+ " 
 		/**creation d'une combinaisaon secrete*/
 
 		guess=this.createRandomCode(taillecode);
-		if (modedeveloppeur=true) {
+		if (pro.getModedeveloppeur()==1) {
 			logger.info("mode developpeur activé");
 			logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
 
@@ -154,27 +156,48 @@ logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre+ " 
 
 	/**methode de nombre aléatoire */
 	public static CodeS createRandomCode(int length) {
+		Jeupropriete pro= new Jeupropriete();
 		Random rnd = new Random();
 		T[] ts = new T[length];
 		for (int i = 0; i < length; i++) {
-			ts[i] = T.values()[rnd.nextInt(nbdechiffre)];
+			ts[i] = T.values()[rnd.nextInt(pro.getNbchiffre())];
 
 		}
 		return new CodeS(ts);
 	}
 	/**methode proposant au joueur Humain de saisir un code*/
 	public static CodeS SecretJoueur(int length) {
-		System.out.println("combinaison a saisir sur "+" positions");
-		Scanner sj = new Scanner(System.in);
-		String val1 = sj.nextLine();
+		
+		Jeupropriete pro=new Jeupropriete();
+
+		System.out.println("Combinaison secrete : ");
+
+
+
+		String val1=null;
+
 		T[] ts = new T[length];
-		for (int i = 0; i < length; i++) {
-			//if (ts.length<4) {
-			ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
-			//}
+		/** creation d'une boucle permettant de restreindre la saisie clavier uniquement au combinaison definit par l'utilisateur
+		 * 
+		 */
+		do {
+			Scanner sc1= new Scanner(System.in);
+
+			val1=sc1.nextLine();
+			if (!val1.matches("[0-"+pro.getNbchiffre()+"]+") || val1.length() !=pro.getTaillecode()) {
+
+				Erreur.erreurNbr();
+			}
+			else {
+				for (int i = 0; i < length; i++) {
+					ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+
+				}
 
 
-		}
+			}
+		}	while (val1.length()!= pro.getTaillecode() || !val1.matches("[0-"+pro.getNbchiffre()+"]+"));
+
 		return new CodeS(ts);
 	}
 

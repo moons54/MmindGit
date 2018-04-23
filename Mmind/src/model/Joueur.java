@@ -12,23 +12,23 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Joueur {
-	
+
 	private static final Logger logger = LogManager.getLogger(Joueur.class);
 	private static int nbdecoup;
 	private static int taillecode;
 	private CodeS secretCode;
-	private CodeS guess;
-	private Boolean modedeveloppeur;
+	private static CodeS guess;
+	private int modedeveloppeur;
 	private Jeupropriete pro=new Jeupropriete();
 	private static  int nbdechiffre;
-	
-	public Joueur(int taillecode,int nbdechiffre,boolean modedeveloppeur,int nbdecoup) {
+
+	public Joueur(int taillecode,int nbdechiffre,int modedeveloppeur,int nbdecoup) {
 		this.taillecode=taillecode;
 		this.secretCode=createRandomCode(taillecode,nbdechiffre);
 		this.modedeveloppeur=modedeveloppeur;
 		this.nbdechiffre=nbdechiffre;
 		this.nbdecoup=nbdecoup;
-		//	this.guess=HypotheseJoueur(this.taillecode);
+
 
 	}
 	/**methode de jeu pour Mastermind joueur : decodeur ordinateur : codeur humain*/
@@ -38,7 +38,7 @@ public class Joueur {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering Mastermind()");
 		}
-		if (modedeveloppeur=true) {
+		if (pro.getModedeveloppeur()==1) {
 			System.out.println("__________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
 			System.out.println("__________________________________");
@@ -49,14 +49,14 @@ public class Joueur {
 			System.out.println(" code secret "+secretCode.toString());
 			System.out.println("__________________________________");
 		}
-		
-		
+
+
 		CodeS guess=new CodeS();
 
 
 		for (int i = 1; i <nbdecoup; i++) {
 
-			guess=this.HypotheseJoueur(taillecode,nbdechiffre);
+			guess=this.HypotheseJoueur(taillecode);
 
 
 			Reponse reponse = guess.compare(this.secretCode);
@@ -90,30 +90,40 @@ public class Joueur {
 		return null ;
 	}
 
-	public static CodeS HypotheseJoueur(int length,int nbdechiffre) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("entering HypotheseJoueur(int,int)");
-			logger.debug("length: " + length);
-			logger.debug("nbdechiffre: " + nbdechiffre);
-		}
-		Scanner sc1= new Scanner(System.in);
+	public static CodeS HypotheseJoueur(int length) {
+		Jeupropriete pro=new Jeupropriete();
 
-		System.out.println("code a saisir exemple sur "+length+ " positions puis ENTRER");
-		String val1 = sc1.nextLine();
+		System.out.println("Combinaison : ");
+
+
+
+		String val1=null;
+
 		T[] ts = new T[length];
-		for (int i = 0; i < length; i++) {
-		//	if (ts[i].ordinal()<nbdechiffre-1) {
-				ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
-		//	}
-	
-		}
+		/** creation d'une boucle permettant de restreindre la saisie clavier uniquement au combinaison definit par l'utilisateur
+		 * 
+		 */
+		do {
+			Scanner sc1= new Scanner(System.in);
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("exiting HypotheseJoueur()");
-			logger.debug("returning: " + new CodeS(ts));
-		}
+			val1=sc1.nextLine();
+			if (!val1.matches("[0-"+pro.getNbchiffre()+"]+") || val1.length() !=pro.getTaillecode()) {
+
+				Erreur.erreurNbr();
+			}
+			else {
+				for (int i = 0; i < length; i++) {
+					ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+
+				}
+
+
+			}
+		}	while (val1.length()!= pro.getTaillecode() || !val1.matches("[0-"+pro.getNbchiffre()+"]+"));
+
 		return new CodeS(ts);
 	}
+
 
 	public static CodeS createRandomCode(int length,int nbdechiffre) {
 		if (logger.isDebugEnabled()) {
@@ -143,11 +153,11 @@ public class Joueur {
 	 */
 	public Joueur plusmoinsJoueur() {
 
-		
+
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering plusmoinsJoueur()");
 		}
-		if (modedeveloppeur=true) {
+		if (pro.getModedeveloppeur()==1) {
 			System.out.println("__________________________________");
 			System.out.println("Nombre de coup:" + nbdecoup);
 			System.out.println("__________________________________");
@@ -158,12 +168,12 @@ public class Joueur {
 			System.out.println(" code secret "+secretCode.toString());
 			System.out.println("__________________________________");
 		}
-		
-		
+
+
 		for (int i = 1; i <nbdecoup ; i++) {
 
 
-			guess=this.HypotheseJoueur(taillecode,nbdechiffre);
+			guess=this.HypotheseJoueur(taillecode);
 
 
 			System.out.println("valeur du guess"+guess.toString());

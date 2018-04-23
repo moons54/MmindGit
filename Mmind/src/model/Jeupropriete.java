@@ -7,8 +7,7 @@ import java.util.Properties;
 import strategie.Knuth2;
 import strategie.Simple;
 import strategie.choixMastermindIA;
-
-
+import IHM.Demarrage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +17,7 @@ public class Jeupropriete {
 	private  static int nbcoup;
 	private static int nbchiffre;
 	private static int IAchoix;
-	private static Boolean modedeveloppeur;
+	private static int modedeveloppeur;
 	protected Properties prop = new Properties();
 
 	static final Logger logger = LogManager.getLogger();
@@ -48,7 +47,7 @@ public class Jeupropriete {
 			nbcoup = Integer.valueOf(prop.getProperty("nbcoup"));
 			IAchoix= Integer.valueOf(prop.getProperty("choixIA"));
 			nbchiffre=Integer.valueOf(prop.getProperty("nbchiffre"));
-			modedeveloppeur=Boolean.valueOf(prop.getProperty("modedeveloppeur"));
+			modedeveloppeur=Integer.valueOf(prop.getProperty("modedeveloppeur"));
 
 
 		} catch (IOException ex) {
@@ -98,8 +97,19 @@ public class Jeupropriete {
 
 
 
-	public static Boolean getModedeveloppeur() {
+	public static int getModedeveloppeur() {
 		return modedeveloppeur;
+	}
+
+
+
+	public void moddvlp() {
+		Demarrage dem=new Demarrage();
+		if ( dem.getMddev()==1){
+			System.out.println("mode developpeur activé");
+			
+		}
+		
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import model.Duel;
+import model.Erreur;
 import model.IA;
 import model.Jeupropriete;
 import model.Joueur;
@@ -44,15 +45,24 @@ public class Men_mastermind {
 				"\n"+"------------------------------------------------------------------------"+
 				"\n"+"Votre choix : ");
 
-		Scanner sc = new Scanner(System.in);
 
-		int val1 = sc.nextInt();
-		bouclechoix(val1);
-	}
-	public void bouclechoix(int val) throws IOException {
-		Jeupropriete pro = new Jeupropriete();
-		try {
-			switch (val) {
+
+		int val1=0;
+
+		do {
+			Scanner sc = new Scanner(System.in);
+
+
+			if(!sc.hasNextInt()) {
+				Erreur.erreurChoix();
+				continue;
+			}
+
+			val1= sc.nextInt();
+
+			Jeupropriete pro = new Jeupropriete();
+
+			switch (val1) {
 			case 1:
 				System.out.println("Mode Defenseur");
 
@@ -72,13 +82,13 @@ public class Men_mastermind {
 					break;
 				}
 
-				replay(val);
+				replay(val1);
 				break;
 			case 2: 
 				System.out.println("Mode challenger");
 				Joueur jo=new Joueur(pro.getTaillecode(),pro.getNbchiffre(),pro.getModedeveloppeur(),pro.getNbcoup());
 				jo.Mastermind();
-				replay(val);
+				replay(val1);
 				break;
 			case 3:
 				System.out.println("Mode DUEL");
@@ -100,15 +110,13 @@ public class Men_mastermind {
 				}
 
 
-				replay(val);
+				replay(val1);
 			default:
 				break;
+
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.catching(e);
-		}
+
+		}while (val1 != 1 && val1 != 2 && val1 != 3 );
 
 	}
 
@@ -119,14 +127,19 @@ public class Men_mastermind {
 				+"\n"+"2____Changer de jeu"
 				+"\n"+"3____Quitter l'application");
 
-		Scanner scc= new Scanner(System.in);
+		int retourchoix=0;
+		do {
+			Scanner scc= new Scanner(System.in);
+			if(!scc.hasNextInt()) {
+				Erreur.erreurChoix();
+				continue;
+			}
+			retourchoix=scc.nextInt();
+			Jeupropriete pro=new Jeupropriete();
 
-		int retourchoix=scc.nextInt();
-
-		try {
 			switch (retourchoix) {
 			case 1:
-				bouclechoix(val);
+				new Men_mastermind();
 				break;
 			case 2:
 				new Men_general();
@@ -135,15 +148,10 @@ public class Men_mastermind {
 				System.out.println("fin de partie");
 				break;
 			default:
-
-				//System.out.println("nombre de partie gagné : "+ stat.getGagnepartour());
+				Erreur.erreurChoix();
 				break;
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.catching(e);
-		}	
 
+		}while(retourchoix !=1 && retourchoix !=2 && retourchoix !=3 );
 	}
 }

@@ -23,7 +23,7 @@ private  boolean modedeveloppeur;
 	private int nbdecoup;
 
 
-	public Duel(int taillecode,choixMastermindIA strategie,int nbdechiffre,boolean modedeveloppeur,int nbdecoup) {
+	public Duel(int taillecode,choixMastermindIA strategie,int nbdechiffre,int modedeveloppeur,int nbdecoup) {
 		this.taillecode=taillecode;
 		this.secretCode=createRandomCode(this.taillecode);
 		this.secretCode1=SecretJoueur(this.taillecode);
@@ -44,7 +44,7 @@ private  boolean modedeveloppeur;
 	public Duel run() {
 
 		logger.info("Lancement partie : Duel MASTERMIND");
-		if (modedeveloppeur=true) {
+		if (pro.getModedeveloppeur()==1) {
 			logger.info("mode developpeur activé");
 			logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre1+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
 
@@ -127,7 +127,7 @@ private  boolean modedeveloppeur;
 	}
 	public Duel DuelPlusMoins() {
 		logger.trace("Lancement partie : Duel PLUSMOINS");
-		if (modedeveloppeur=true) {
+		if (pro.getModedeveloppeur()==1) {
 			logger.info("mode developpeur activé");
 			logger.debug("nb de coup "+ nbdecoup+ "  "+"nombre de chiffre "+ nbdechiffre1+ " nombre de bouton "+taillecode + " code secret "+ secretCode);
 
@@ -220,15 +220,38 @@ private  boolean modedeveloppeur;
 	}
 
 	//methode utilisée pour creer une hypothese de combinaison saisie par le joueur.
+	
 	public static CodeS HypotheseJoueur(int length) {
-		Scanner sc1= new Scanner(System.in);
-		System.out.println("Combinaison : ");
-		String val1 = sc1.nextLine();
-		T[] ts = new T[length];
-		for (int i = 0; i < length; i++) {
-			ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+		Jeupropriete pro=new Jeupropriete();
 
-		}
+		System.out.println("Combinaison : ");
+
+
+
+		String val1=null;
+
+		T[] ts = new T[length];
+		/** creation d'une boucle permettant de restreindre la saisie clavier uniquement au combinaison definit par l'utilisateur
+		 * 
+		 */
+		do {
+			Scanner sc1= new Scanner(System.in);
+
+			val1=sc1.nextLine();
+			if (!val1.matches("[0-"+pro.getNbchiffre()+"]+") || val1.length() !=pro.getTaillecode()) {
+
+				Erreur.erreurNbr();
+			}
+			else {
+				for (int i = 0; i < length; i++) {
+					ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+
+				}
+
+
+			}
+		}	while (val1.length()!= pro.getTaillecode() || !val1.matches("[0-"+pro.getNbchiffre()+"]+"));
+
 		return new CodeS(ts);
 	}
 	/**methode de nombre aléatoire */
@@ -243,17 +266,38 @@ private  boolean modedeveloppeur;
 	}
 
 	//methode utilisée pour creer un code secret 
-	public static CodeS SecretJoueur(int length) {
-		//Random rnd = new Random();
-		System.out.println("code secret saisi :");
-		Scanner ss = new Scanner(System.in);
-		String val1 = ss.nextLine();
+public static CodeS SecretJoueur(int length) {
+		
+		Jeupropriete pro=new Jeupropriete();
+
+		System.out.println("Combinaison secrete : ");
+
+
+
+		String val1=null;
 
 		T[] ts = new T[length];
-		for (int i = 0; i < length; i++) {
-			ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+		/** creation d'une boucle permettant de restreindre la saisie clavier uniquement au combinaison definit par l'utilisateur
+		 * 
+		 */
+		do {
+			Scanner sc1= new Scanner(System.in);
 
-		}
+			val1=sc1.nextLine();
+			if (!val1.matches("[0-"+pro.getNbchiffre()+"]+") || val1.length() !=pro.getTaillecode()) {
+
+				Erreur.erreurNbr();
+			}
+			else {
+				for (int i = 0; i < length; i++) {
+					ts[i] = T.values()[Integer.parseInt(val1.substring(i, i+1))];
+
+				}
+
+
+			}
+		}	while (val1.length()!= pro.getTaillecode() || !val1.matches("[0-"+pro.getNbchiffre()+"]+"));
+
 		return new CodeS(ts);
 	}
 	public static int getNbdechiffre1() {
