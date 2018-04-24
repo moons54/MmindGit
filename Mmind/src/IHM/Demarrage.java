@@ -94,12 +94,13 @@ public class Demarrage {
 		if(args.length>0) {
 		
 		mddev=Integer.parseInt(args[0]);
+		System.out.println(" val 1"+mddev);
 			//Jeupropriete.setModedeveloppeur( Integer.parseInt(args[0]));
 			
 		}
 		else
 			mddev=Integer.parseInt(prop.getProperty("modedeveloppeur"));
-		
+		System.out.println(" val 2"+mddev);
 		
 		//lancement du menu général situa dans IHM
 		new Men_general();
