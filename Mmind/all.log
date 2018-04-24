@@ -1,5 +1,0 @@
-2018-04-24 00:15:55.257 [main] INFO  IHM.Demarrage - fichier propriete lancé
-2018-04-24 00:16:01.487 [main] INFO  model.IA - lancement du jeu : Defenseur mastermind
-2018-04-24 00:16:01.487 [main] INFO  model.IA - mode developpeur activé
-2018-04-24 00:16:01.487 [main] DEBUG model.IA - nb de coup 9  nombre de chiffre 8 nombre de bouton 4 code secret |3||2||2||1|
-2018-04-24 00:16:02.606 [main] INFO  model.IA - partie gagné par l'ordinateur  |3||2||2||1|
